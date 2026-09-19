@@ -1,5 +1,5 @@
 // Places service worker. CACHE is generated from the app's content hash by build/site.py.
-const CACHE = "places-1033cd04e1e0";
+const CACHE = "places-5b592b8d5430";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icon-32.png", "icon-180.png", "icon-192.png", "icon-512.png", "icon-512-maskable.png"];
 
 self.addEventListener("install", (e) => {
