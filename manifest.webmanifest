@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Places",
-  "short_name": "Places",
+  "name": "ESPA",
+  "short_name": "ESPA",
   "description": "The actor's backstage: Shakespeare's plays, monologues, rehearsal, cold reads and warm-ups.",
   "start_url": "./",
   "scope": "./",
