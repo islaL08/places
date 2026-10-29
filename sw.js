@@ -1,9 +1,16 @@
 // Places service worker. CACHE is generated from the app's content hash by build/site.py.
-const CACHE = "places-28a03bd2d21f";
-const CORE = ["./", "index.html", "manifest.webmanifest", "icon-32.png", "icon-180.png", "icon-192.png", "icon-512.png", "icon-512-maskable.png"];
+const CACHE = "places-43650d264f68";
+const CORE = ["manifest.webmanifest", "icon-32.png", "icon-180.png", "icon-192.png", "icon-512.png", "icon-512-maskable.png"];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
+  // The document must land or this version is no use. The icons are nice to have, so one
+  // dropped request on patchy data must not throw the whole update away, which addAll would.
+  e.waitUntil(
+    caches.open(CACHE)
+      .then((c) => c.add(new Request("index.html", { cache: "reload" }))
+        .then(() => Promise.all(CORE.map((u) => c.add(new Request(u, { cache: "reload" })).catch(() => null)))))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener("activate", (e) => {
